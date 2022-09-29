@@ -25,5 +25,13 @@ pipeline {
                 }
             }
         }
+        stage ('Archive if main branch') {
+            when {
+               branch 'main';
+            }
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar'
+            }
+        }
     }
 }

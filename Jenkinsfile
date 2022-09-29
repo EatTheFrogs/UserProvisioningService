@@ -16,9 +16,11 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
-                    if(env.BRANCH_NAME == 'main') {
-                        archiveArtifacts artifacts: 'target/*.jar',
-                                           onlyIfSuccessful: true
+                    steps {
+                        if(env.BRANCH_NAME == 'main') {
+                            archiveArtifacts artifacts: 'target/*.jar',
+                                               onlyIfSuccessful: true
+                        }
                     }
                 }
             }

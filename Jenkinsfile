@@ -9,14 +9,22 @@ pipeline {
                 '''
             }
         }
-        stage ('Build') {
+        stage ('Test') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn clean compile package'
             }
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
                 }
+            }
+        }
+        stage ('Archive if main branch') {
+            when {
+               branch 'main';
+            }
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar'
             }
         }
     }

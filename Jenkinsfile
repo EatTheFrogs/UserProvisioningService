@@ -16,12 +16,6 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
-                    steps {
-                        if(env.BRANCH_NAME == 'main') {
-                            archiveArtifacts artifacts: 'target/*.jar',
-                                               onlyIfSuccessful: true
-                        }
-                    }
                 }
             }
         }

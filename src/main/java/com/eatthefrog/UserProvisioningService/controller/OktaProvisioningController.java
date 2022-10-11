@@ -17,7 +17,6 @@ import java.util.List;
 
 @Log
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
 public class OktaProvisioningController {
 
@@ -27,14 +26,14 @@ public class OktaProvisioningController {
     private static final String OKTA_VERIFICATION_HEADER = "x-okta-verification-challenge";
     public DefaultSecurityFilterChain chain;
 
-    @GetMapping("/provision")
+    @GetMapping("/create")
     public ResponseEntity<JsonNode> verifyOktaHook(@RequestHeader(OKTA_VERIFICATION_HEADER) String verificationString) {
         ObjectNode json = objectMapper.createObjectNode();
         json.put("verification", verificationString);
         return ResponseEntity.ok().body(json);
     }
 
-    @PostMapping("/provision")
+    @PostMapping("/create")
     public ResponseEntity<String> provisionUser(@RequestBody String jsonString) {
         log.info("Okta User Provisioning Message received:\n"+jsonString);
         //userProvisioningService.publishOktaMessage();

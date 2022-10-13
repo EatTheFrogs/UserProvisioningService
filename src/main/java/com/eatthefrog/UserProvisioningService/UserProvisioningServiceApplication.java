@@ -14,23 +14,6 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class UserProvisioningServiceApplication {
 
-	@Value("${spring.rabbitmq.host}")
-	private String host;
-
-	@Value("${spring.rabbitmq.port}")
-	private String port;
-
-	@Value("${spring.rabbitmq.username}")
-	private String username;
-
-	@Value("${spring.rabbitmq.password}")
-	private String password;
-
-	@EventListener(ApplicationReadyEvent.class)
-	public void onStartup() {
-		System.out.println(String.format("Connecting to %s:%s using %s / %s", host, port, username, password));
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(UserProvisioningServiceApplication.class, args);
 	}

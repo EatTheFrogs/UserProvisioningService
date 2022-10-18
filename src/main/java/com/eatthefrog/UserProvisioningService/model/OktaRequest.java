@@ -13,4 +13,5 @@ public class OktaRequest extends BaseModel {
     private static final long serialVersionUID = 852012434758894066L;
 
     private OktaRequestData data;
+    private String eventTime;
 }
